@@ -1,0 +1,541 @@
+/**
+ * ADHD-Friendly UI Components - Styles
+ * By EPIC Digital - 2026
+ */
+
+:root {
+  /* Colors */
+  --adhd-primary: #FF0050;
+  --adhd-success: #10B981;
+  --adhd-warning: #F59E0B;
+  --adhd-error: #EF4444;
+  --adhd-info: #3B82F6;
+
+  /* Neutrals */
+  --adhd-gray-50: #FAFAFA;
+  --adhd-gray-100: #F5F5F5;
+  --adhd-gray-200: #E8E8E8;
+  --adhd-gray-700: #404040;
+  --adhd-gray-900: #171717;
+
+  /* Spacing */
+  --adhd-space-xs: 4px;
+  --adhd-space-sm: 8px;
+  --adhd-space-md: 16px;
+  --adhd-space-lg: 24px;
+  --adhd-space-xl: 32px;
+
+  /* Transitions */
+  --adhd-transition: 0.2s ease;
+}
+
+/* ============================================================================
+   1. TASK MANAGER
+   ============================================================================ */
+
+.adhd-task-manager {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.task-progress {
+  padding: var(--adhd-space-lg);
+  border-bottom: 2px solid var(--adhd-gray-200);
+  display: flex;
+  align-items: center;
+  gap: var(--adhd-space-md);
+}
+
+.progress-text {
+  font-weight: 600;
+  color: var(--adhd-gray-900);
+  white-space: nowrap;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--adhd-gray-200);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--adhd-success);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.task-card {
+  padding: var(--adhd-space-lg);
+  border-left: 4px solid transparent;
+}
+
+.task-card.high {
+  border-left-color: var(--adhd-error);
+  background: #FEF2F2;
+}
+
+.task-card.medium {
+  border-left-color: var(--adhd-warning);
+  background: #FFFBEB;
+}
+
+.task-card.low {
+  border-left-color: var(--adhd-info);
+  background: #EFF6FF;
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: var(--adhd-space-md);
+  margin-bottom: var(--adhd-space-sm);
+}
+
+.task-header h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--adhd-gray-900);
+}
+
+.task-status {
+  padding: var(--adhd-space-xs) var(--adhd-space-sm);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.task-status.pending {
+  background: var(--adhd-gray-200);
+  color: var(--adhd-gray-700);
+}
+
+.task-status.in-progress {
+  background: #FEF3C7;
+  color: #92400E;
+}
+
+.task-status.urgent {
+  background: #FEE2E2;
+  color: #991B1B;
+}
+
+.task-description {
+  color: var(--adhd-gray-700);
+  margin-bottom: var(--adhd-space-md);
+  line-height: 1.6;
+}
+
+.task-time {
+  font-size: 14px;
+  color: var(--adhd-gray-700);
+}
+
+.task-action-btn {
+  width: 100%;
+  padding: var(--adhd-space-md) var(--adhd-space-lg);
+  background: var(--adhd-primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--adhd-transition);
+  margin: var(--adhd-space-lg);
+  width: calc(100% - var(--adhd-space-xl));
+}
+
+.task-action-btn:hover {
+  background: #E60047;
+  transform: translateY(-1px);
+}
+
+.remaining-tasks {
+  padding: var(--adhd-space-lg);
+  background: var(--adhd-gray-50);
+}
+
+.remaining-header {
+  font-size: 12px;
+  color: var(--adhd-gray-700);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--adhd-space-sm);
+}
+
+.mini-task {
+  padding: var(--adhd-space-sm);
+  background: white;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-bottom: var(--adhd-space-xs);
+  color: var(--adhd-gray-700);
+}
+
+.completion-screen {
+  padding: var(--adhd-space-xl);
+  text-align: center;
+}
+
+.completion-icon {
+  font-size: 64px;
+  margin-bottom: var(--adhd-space-lg);
+}
+
+.completion-screen h2 {
+  font-size: 28px;
+  margin-bottom: var(--adhd-space-sm);
+  color: var(--adhd-gray-900);
+}
+
+.completion-screen p {
+  color: var(--adhd-gray-700);
+}
+
+/* ============================================================================
+   2. STATUS INDICATORS
+   ============================================================================ */
+
+.adhd-status {
+  display: flex;
+  gap: var(--adhd-space-md);
+  padding: var(--adhd-space-md);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  margin-bottom: var(--adhd-space-md);
+}
+
+.adhd-status.success {
+  background: #F0FDF4;
+  border-color: var(--adhd-success);
+}
+
+.adhd-status.warning {
+  background: #FFFBEB;
+  border-color: var(--adhd-warning);
+}
+
+.adhd-status.error {
+  background: #FEF2F2;
+  border-color: var(--adhd-error);
+}
+
+.adhd-status.info {
+  background: #EFF6FF;
+  border-color: var(--adhd-info);
+}
+
+.status-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.status-content strong {
+  display: block;
+  margin-bottom: var(--adhd-space-xs);
+  font-size: 14px;
+}
+
+.status-content p {
+  font-size: 14px;
+  color: var(--adhd-gray-700);
+  margin: 0;
+}
+
+/* ============================================================================
+   3. PROGRESS STEPS
+   ============================================================================ */
+
+.adhd-progress-steps {
+  background: white;
+  padding: var(--adhd-space-lg);
+  border-radius: 12px;
+}
+
+.step {
+  display: flex;
+  gap: var(--adhd-space-md);
+  margin-bottom: var(--adhd-space-lg);
+  position: relative;
+}
+
+.step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 16px;
+  top: 40px;
+  width: 2px;
+  height: calc(100% + var(--adhd-space-lg));
+  background: var(--adhd-gray-200);
+}
+
+.step.completed::after {
+  background: var(--adhd-success);
+}
+
+.step-number {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--adhd-gray-200);
+  color: var(--adhd-gray-700);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.step.active .step-number {
+  background: var(--adhd-primary);
+  color: white;
+}
+
+.step.completed .step-number {
+  background: var(--adhd-success);
+  color: white;
+}
+
+.step.completed .step-number::before {
+  content: '✓';
+}
+
+.step-content h4 {
+  font-size: 16px;
+  margin-bottom: var(--adhd-space-xs);
+  color: var(--adhd-gray-900);
+}
+
+.step-content p {
+  font-size: 14px;
+  color: var(--adhd-gray-700);
+  margin: 0;
+}
+
+/* ============================================================================
+   4. FOCUS MODE
+   ============================================================================ */
+
+.adhd-focus-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.2s ease;
+}
+
+.adhd-focus-overlay.closing {
+  animation: fadeOut 0.2s ease;
+}
+
+.adhd-focus-modal {
+  background: white;
+  padding: var(--adhd-space-xl);
+  border-radius: 16px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.3s ease;
+}
+
+.adhd-focus-modal h3 {
+  font-size: 24px;
+  margin-bottom: var(--adhd-space-md);
+  color: var(--adhd-gray-900);
+}
+
+.adhd-focus-modal p {
+  color: var(--adhd-gray-700);
+  margin-bottom: var(--adhd-space-lg);
+  line-height: 1.6;
+}
+
+.focus-actions {
+  display: flex;
+  gap: var(--adhd-space-sm);
+}
+
+.focus-btn {
+  flex: 1;
+  padding: var(--adhd-space-md);
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--adhd-transition);
+}
+
+.focus-btn.primary {
+  background: var(--adhd-primary);
+  color: white;
+}
+
+.focus-btn.primary:hover {
+  background: #E60047;
+  transform: translateY(-1px);
+}
+
+.focus-btn.secondary {
+  background: var(--adhd-gray-200);
+  color: var(--adhd-gray-900);
+}
+
+.focus-btn.secondary:hover {
+  background: var(--adhd-gray-700);
+  color: white;
+}
+
+/* ============================================================================
+   5. NOTIFICATIONS
+   ============================================================================ */
+
+.adhd-notification {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  background: white;
+  padding: var(--adhd-space-md) var(--adhd-space-lg);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  gap: var(--adhd-space-md);
+  z-index: 9998;
+  transform: translateX(400px);
+  opacity: 0;
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+}
+
+.adhd-notification.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.adhd-notification.success {
+  border-left-color: var(--adhd-success);
+}
+
+.adhd-notification.warning {
+  border-left-color: var(--adhd-warning);
+}
+
+.adhd-notification.error {
+  border-left-color: var(--adhd-error);
+}
+
+.adhd-notification.info {
+  border-left-color: var(--adhd-info);
+}
+
+.notification-icon {
+  font-size: 20px;
+}
+
+.notification-message {
+  font-size: 14px;
+  color: var(--adhd-gray-900);
+}
+
+/* ============================================================================
+   6. CHUNKED CONTENT
+   ============================================================================ */
+
+.adhd-chunked-content {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.chunked-section {
+  border-bottom: 1px solid var(--adhd-gray-200);
+}
+
+.chunked-section:last-child {
+  border-bottom: none;
+}
+
+.chunk-header {
+  padding: var(--adhd-space-md) var(--adhd-space-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background var(--adhd-transition);
+}
+
+.chunk-header:hover {
+  background: var(--adhd-gray-50);
+}
+
+.chunk-header h3 {
+  font-size: 18px;
+  color: var(--adhd-gray-900);
+}
+
+.chunk-toggle {
+  font-size: 24px;
+  color: var(--adhd-gray-700);
+  font-weight: 300;
+}
+
+.chunked-section.expanded .chunk-toggle {
+  color: var(--adhd-primary);
+}
+
+.chunk-content {
+  padding: var(--adhd-space-lg);
+  color: var(--adhd-gray-700);
+  line-height: 1.6;
+}
+
+/* ============================================================================
+   ANIMATIONS
+   ============================================================================ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

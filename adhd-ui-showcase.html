@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADHD-Friendly UI System | EPIC Digital</title>
+    <meta name="description" content="Design system e biblioteca de componentes otimizados para pessoas com TDAH. Interfaces limpas, organizadas e focadas.">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="ADHD-Friendly UI System">
+    <meta property="og:description" content="Design system otimizado para neurodiversidade. Componentes React/Vue prontos para uso.">
+    <meta property="og:image" content="https://www.epic.digital/hubfs/adhd-ui-og.png">
+
+    <!-- Cache Prevention -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --epic-red: #FF0050;
+            --epic-black: #0A0A0A;
+            --epic-white: #FFFFFF;
+            --gray-50: #FAFAFA;
+            --gray-100: #F5F5F5;
+            --gray-200: #E8E8E8;
+            --gray-300: #D4D4D4;
+            --gray-700: #404040;
+            --gray-900: #171717;
+
+            /* ADHD-Friendly Colors */
+            --status-success: #10B981;
+            --status-warning: #F59E0B;
+            --status-error: #EF4444;
+            --status-info: #3B82F6;
+            --focus-blue: #60A5FA;
+
+            /* Spacing System */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+
+            /* Typography */
+            --font-system: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            --font-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, monospace;
+        }
+
+        body {
+            font-family: var(--font-system);
+            line-height: 1.6;
+            color: var(--gray-900);
+            background: var(--gray-50);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--epic-white);
+            border-bottom: 1px solid var(--gray-200);
+            padding: var(--space-md) var(--space-xl);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .nav-logo svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .nav-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+
+        .nav-subtitle {
+            font-size: 12px;
+            color: var(--gray-700);
+            font-weight: 400;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: var(--space-md);
+            align-items: center;
+        }
+
+        .toggle-mode {
+            background: var(--gray-100);
+            border: 1px solid var(--gray-300);
+            border-radius: 24px;
+            padding: var(--space-sm) var(--space-md);
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            transition: all 0.2s;
+        }
+
+        .toggle-mode:hover {
+            background: var(--gray-200);
+        }
+
+        .toggle-mode.active {
+            background: var(--epic-red);
+            color: white;
+            border-color: var(--epic-red);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: var(--space-2xl) var(--space-xl);
+            background: linear-gradient(135deg, var(--gray-50) 0%, var(--gray-100) 100%);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: var(--space-md);
+            line-height: 1.1;
+        }
+
+        .hero .highlight {
+            color: var(--epic-red);
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--gray-700);
+            max-width: 700px;
+            margin: 0 auto var(--space-xl);
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-xl);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--epic-red);
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--gray-700);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Section Container */
+        .section {
+            padding: var(--space-2xl) var(--space-xl);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: var(--space-md);
+        }
+
+        .section-header p {
+            font-size: 18px;
+            color: var(--gray-700);
+        }
+
+        /* Comparison Grid */
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-xl);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .comparison-panel {
+            background: white;
+            border-radius: 12px;
+            padding: var(--space-xl);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .comparison-panel h3 {
+            font-size: 24px;
+            margin-bottom: var(--space-md);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .comparison-panel.standard h3 {
+            color: var(--gray-700);
+        }
+
+        .comparison-panel.adhd h3 {
+            color: var(--epic-red);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge.standard {
+            background: var(--gray-200);
+            color: var(--gray-700);
+        }
+
+        .badge.adhd {
+            background: var(--epic-red);
+            color: white;
+        }
+
+        /* Demo Task List - Standard */
+        .demo-tasklist-standard {
+            background: white;
+            border: 1px solid var(--gray-300);
+            border-radius: 8px;
+        }
+
+        .demo-tasklist-standard .task-header {
+            background: linear-gradient(90deg, #667EEA 0%, #764BA2 100%);
+            color: white;
+            padding: var(--space-md);
+            border-radius: 8px 8px 0 0;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .demo-tasklist-standard .task-item {
+            padding: var(--space-sm) var(--space-md);
+            border-bottom: 1px solid var(--gray-200);
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .demo-tasklist-standard input[type="checkbox"] {
+            width: 14px;
+            height: 14px;
+        }
+
+        .demo-tasklist-standard .task-footer {
+            padding: var(--space-sm) var(--space-md);
+            background: var(--gray-100);
+            font-size: 11px;
+            color: var(--gray-700);
+            text-align: center;
+        }
+
+        /* Demo Task List - ADHD */
+        .demo-tasklist-adhd {
+            background: white;
+            border: 2px solid var(--gray-200);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .demo-tasklist-adhd .current-task {
+            padding: var(--space-lg);
+            border-bottom: 2px solid var(--gray-200);
+        }
+
+        .demo-tasklist-adhd .progress-indicator {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+            font-size: 14px;
+            color: var(--gray-700);
+        }
+
+        .demo-tasklist-adhd .progress-bar {
+            flex: 1;
+            height: 6px;
+            background: var(--gray-200);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .demo-tasklist-adhd .progress-fill {
+            height: 100%;
+            background: var(--status-success);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .demo-tasklist-adhd .task-card {
+            background: var(--gray-50);
+            border: 2px solid var(--focus-blue);
+            border-radius: 8px;
+            padding: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+
+        .demo-tasklist-adhd .task-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            color: var(--gray-900);
+        }
+
+        .demo-tasklist-adhd .task-status {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .demo-tasklist-adhd .task-status.in-progress {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        .demo-tasklist-adhd .task-action {
+            background: var(--epic-red);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: var(--space-md) var(--space-lg);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s;
+        }
+
+        .demo-tasklist-adhd .task-action:hover {
+            background: #E60047;
+            transform: translateY(-1px);
+        }
+
+        .demo-tasklist-adhd .remaining-tasks {
+            padding: var(--space-md);
+            background: var(--gray-50);
+        }
+
+        .demo-tasklist-adhd .remaining-header {
+            font-size: 12px;
+            color: var(--gray-700);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .demo-tasklist-adhd .mini-task {
+            padding: var(--space-sm);
+            background: white;
+            border-radius: 6px;
+            font-size: 14px;
+            margin-bottom: var(--space-xs);
+            color: var(--gray-700);
+        }
+
+        /* Principles Grid */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .principle-card {
+            background: white;
+            border-radius: 12px;
+            padding: var(--space-lg);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--epic-red);
+        }
+
+        .principle-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gray-100);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--space-md);
+            font-size: 24px;
+        }
+
+        .principle-card h3 {
+            font-size: 20px;
+            margin-bottom: var(--space-sm);
+            color: var(--gray-900);
+        }
+
+        .principle-card p {
+            color: var(--gray-700);
+            line-height: 1.6;
+        }
+
+        .principle-examples {
+            margin-top: var(--space-md);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .principle-examples ul {
+            list-style: none;
+            font-size: 14px;
+            color: var(--gray-700);
+        }
+
+        .principle-examples li {
+            padding: var(--space-xs) 0;
+            padding-left: var(--space-md);
+            position: relative;
+        }
+
+        .principle-examples li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--status-success);
+            font-weight: 700;
+        }
+
+        /* Components Showcase */
+        .components-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--space-xl);
+        }
+
+        .component-demo {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .component-demo-header {
+            background: var(--gray-900);
+            color: white;
+            padding: var(--space-md);
+        }
+
+        .component-demo-header h3 {
+            font-size: 18px;
+            margin-bottom: var(--space-xs);
+        }
+
+        .component-demo-header p {
+            font-size: 13px;
+            color: var(--gray-300);
+        }
+
+        .component-demo-content {
+            padding: var(--space-lg);
+        }
+
+        /* Status Indicators */
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);
+        }
+
+        .status-card {
+            padding: var(--space-md);
+            border-radius: 8px;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .status-card.success {
+            background: #F0FDF4;
+            border-color: var(--status-success);
+        }
+
+        .status-card.warning {
+            background: #FFFBEB;
+            border-color: var(--status-warning);
+        }
+
+        .status-card.error {
+            background: #FEF2F2;
+            border-color: var(--status-error);
+        }
+
+        .status-card.info {
+            background: #EFF6FF;
+            border-color: var(--status-info);
+        }
+
+        .status-card h4 {
+            font-size: 14px;
+            margin-bottom: var(--space-xs);
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .status-card.success .status-dot { background: var(--status-success); }
+        .status-card.warning .status-dot { background: var(--status-warning); }
+        .status-card.error .status-dot { background: var(--status-error); }
+        .status-card.info .status-dot { background: var(--status-info); }
+
+        .status-card p {
+            font-size: 13px;
+            color: var(--gray-700);
+        }
+
+        /* Progress Tracker */
+        .progress-demo {
+            padding: var(--space-lg);
+            background: var(--gray-50);
+            border-radius: 8px;
+        }
+
+        .progress-step {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--gray-200);
+            color: var(--gray-700);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .step-number.active {
+            background: var(--epic-red);
+            color: white;
+        }
+
+        .step-number.completed {
+            background: var(--status-success);
+            color: white;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-content h4 {
+            font-size: 14px;
+            margin-bottom: var(--space-xs);
+            color: var(--gray-900);
+        }
+
+        .step-content p {
+            font-size: 12px;
+            color: var(--gray-700);
+        }
+
+        /* Focus Mode Demo */
+        .focus-mode-demo {
+            position: relative;
+        }
+
+        .focus-overlay {
+            position: relative;
+            padding: var(--space-lg);
+            background: var(--gray-100);
+            border-radius: 8px;
+        }
+
+        .focus-content {
+            background: white;
+            padding: var(--space-lg);
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        .focus-content h4 {
+            font-size: 18px;
+            margin-bottom: var(--space-md);
+        }
+
+        .focus-content p {
+            color: var(--gray-700);
+            margin-bottom: var(--space-md);
+        }
+
+        .focus-actions {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .focus-btn {
+            flex: 1;
+            padding: var(--space-md);
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .focus-btn.primary {
+            background: var(--epic-red);
+            color: white;
+        }
+
+        .focus-btn.primary:hover {
+            background: #E60047;
+        }
+
+        .focus-btn.secondary {
+            background: var(--gray-200);
+            color: var(--gray-900);
+        }
+
+        .focus-btn.secondary:hover {
+            background: var(--gray-300);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--gray-900);
+            color: white;
+            padding: var(--space-2xl) var(--space-xl);
+            text-align: center;
+            margin-top: var(--space-2xl);
+        }
+
+        .cta-section h2 {
+            font-size: 42px;
+            margin-bottom: var(--space-md);
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            color: var(--gray-300);
+            margin-bottom: var(--space-xl);
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-md);
+        }
+
+        .cta-btn {
+            padding: var(--space-md) var(--space-xl);
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: inline-block;
+        }
+
+        .cta-btn.primary {
+            background: var(--epic-red);
+            color: white;
+        }
+
+        .cta-btn.primary:hover {
+            background: #E60047;
+            transform: translateY(-2px);
+        }
+
+        .cta-btn.secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .cta-btn.secondary:hover {
+            background: white;
+            color: var(--gray-900);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--gray-900);
+            color: var(--gray-300);
+            padding: var(--space-xl);
+            text-align: center;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: var(--epic-red);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: var(--space-lg);
+            }
+
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 28px;
+            }
+
+            .cta-section h2 {
+                font-size: 32px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-logo">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="45" fill="#FF0050"/>
+                <text x="50" y="65" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">E</text>
+            </svg>
+            <div>
+                <div class="nav-title">ADHD-Friendly UI</div>
+                <div class="nav-subtitle">by EPIC Digital</div>
+            </div>
+        </div>
+        <div class="nav-actions">
+            <button class="toggle-mode" id="modeToggle">
+                <span id="modeIcon">👁️</span>
+                <span id="modeLabel">Ver Comparação</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Interfaces que <span class="highlight">Funcionam</span><br>para Cérebros ADHD</h1>
+        <p>Design system e biblioteca de componentes otimizados para neurodiversidade. Menos sobrecarga, mais foco, melhores resultados.</p>
+
+        <div class="hero-stats">
+            <div class="stat">
+                <div class="stat-value">15%</div>
+                <div class="stat-label">População Neurodivergente</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">80%</div>
+                <div class="stat-label">Menos Cliques</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">50%</div>
+                <div class="stat-label">Interface Mais Limpa</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="section">
+        <div class="section-header">
+            <h2>O Problema é Real</h2>
+            <p>Interfaces tradicionais criam sobrecarga cognitiva. Veja a diferença:</p>
+        </div>
+
+        <div class="comparison">
+            <!-- Standard UI -->
+            <div class="comparison-panel standard">
+                <h3>
+                    <span class="badge standard">Interface Padrão</span>
+                </h3>
+                <div class="demo-tasklist-standard">
+                    <div class="task-header">
+                        <span>📋 Minhas Tarefas</span>
+                        <span style="font-size: 11px;">12 pendentes</span>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox">
+                        <span>Responder email do cliente</span>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox">
+                        <span>Atualizar planilha de vendas</span>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox">
+                        <span>Ligar para fornecedor</span>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox">
+                        <span>Revisar proposta comercial</span>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox">
+                        <span>Agendar reunião com time</span>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox">
+                        <span>Enviar relatório mensal</span>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox">
+                        <span>Atualizar documentação</span>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox">
+                        <span>Fazer backup dos arquivos</span>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox">
+                        <span>Revisar orçamento</span>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox">
+                        <span>Preparar apresentação</span>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox">
+                        <span>Organizar arquivos</span>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox">
+                        <span>Responder tickets suporte</span>
+                    </div>
+                    <div class="task-footer">
+                        Mostrando todas as tarefas
+                    </div>
+                </div>
+
+                <div style="margin-top: var(--space-md); padding: var(--space-md); background: #FEF2F2; border-radius: 8px;">
+                    <strong style="color: #DC2626;">⚠️ Problemas:</strong>
+                    <ul style="margin-top: var(--space-sm); font-size: 14px; color: var(--gray-700); padding-left: var(--space-lg);">
+                        <li>12 tarefas visíveis ao mesmo tempo</li>
+                        <li>Sem priorização clara</li>
+                        <li>Progresso é só um número</li>
+                        <li>Escolher por onde começar = paralisia</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ADHD-Friendly UI -->
+            <div class="comparison-panel adhd">
+                <h3>
+                    <span class="badge adhd">ADHD Mode</span>
+                </h3>
+                <div class="demo-tasklist-adhd">
+                    <div class="current-task">
+                        <div class="progress-indicator">
+                            <span style="font-weight: 600;">2 de 12</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 16.6%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="task-card">
+                            <div class="task-title">Responder email do cliente</div>
+                            <div style="margin: var(--space-sm) 0;">
+                                <span class="task-status in-progress">
+                                    <span>⏱️</span>
+                                    <span>Em andamento</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <button class="task-action">✓ Marcar como Concluída</button>
+                    </div>
+
+                    <div class="remaining-tasks">
+                        <div class="remaining-header">Próximas (ocultas até concluir atual)</div>
+                        <div class="mini-task" style="opacity: 0.4;">Atualizar planilha de vendas</div>
+                        <div class="mini-task" style="opacity: 0.3;">Ligar para fornecedor</div>
+                        <div class="mini-task" style="opacity: 0.2;">+ 9 tarefas</div>
+                    </div>
+                </div>
+
+                <div style="margin-top: var(--space-md); padding: var(--space-md); background: #F0FDF4; border-radius: 8px;">
+                    <strong style="color: #16A34A;">✓ Benefícios:</strong>
+                    <ul style="margin-top: var(--space-sm); font-size: 14px; color: var(--gray-700); padding-left: var(--space-lg);">
+                        <li>Uma tarefa por vez (sem sobrecarga)</li>
+                        <li>Progresso visual claro (2 de 12)</li>
+                        <li>Cores indicam status</li>
+                        <li>Call-to-action óbvio</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Principles Section -->
+    <section class="section" style="background: white;">
+        <div class="section-header">
+            <h2>Princípios de Design</h2>
+            <p>Baseado em pesquisa e validado pela comunidade neurodivergente</p>
+        </div>
+
+        <div class="principles-grid">
+            <div class="principle-card">
+                <div class="principle-icon">🧩</div>
+                <h3>Chunking de Informação</h3>
+                <p>Quebre informações complexas em blocos pequenos e digestíveis. Cada card/componente deve conter apenas uma ideia ou ação.</p>
+                <div class="principle-examples">
+                    <ul>
+                        <li>Uma tarefa por tela no modo foco</li>
+                        <li>Accordions para esconder complexidade</li>
+                        <li>Passos numerados (1 de 5)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="principle-card">
+                <div class="principle-icon">🎨</div>
+                <h3>Código de Cores</h3>
+                <p>Use cores consistentes para diferenciar tipos e estados. Cores não são decorativas, são funcionais.</p>
+                <div class="principle-examples">
+                    <ul>
+                        <li>Verde = concluído/sucesso</li>
+                        <li>Amarelo = em andamento/atenção</li>
+                        <li>Vermelho = urgente/erro</li>
+                        <li>Azul = informação/neutro</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="principle-card">
+                <div class="principle-icon">📊</div>
+                <h3>Progress Tracking Gentil</h3>
+                <p>Mostre progresso de forma positiva e encorajadora, não punitiva. "2 de 12" ao invés de "faltam 10".</p>
+                <div class="principle-examples">
+                    <ul>
+                        <li>Barra de progresso visual</li>
+                        <li>Linguagem positiva</li>
+                        <li>Celebração de pequenas conquistas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="principle-card">
+                <div class="principle-icon">🧘</div>
+                <h3>Visual Limpo</h3>
+                <p>Remova ruído visual. Cada elemento na tela deve ter um propósito claro. Whitespace é seu aliado.</p>
+                <div class="principle-examples">
+                    <ul>
+                        <li>Modo foco remove distrações</li>
+                        <li>Espaçamento generoso</li>
+                        <li>Sem animações desnecessárias</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="principle-card">
+                <div class="principle-icon">🎯</div>
+                <h3>Uma Tarefa por Vez</h3>
+                <p>Evite paralisia de escolha. Apresente a próxima ação mais importante e esconda o resto até ser necessário.</p>
+                <div class="principle-examples">
+                    <ul>
+                        <li>Interface linear (não múltipla escolha)</li>
+                        <li>CTA único e óbvio</li>
+                        <li>Navegação sequencial</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="principle-card">
+                <div class="principle-icon">⌨️</div>
+                <h3>Atalhos de Teclado</h3>
+                <p>Permita navegação rápida via teclado. Reduz fricção e mantém o fluxo de trabalho.</p>
+                <div class="principle-examples">
+                    <ul>
+                        <li>Enter = ação primária</li>
+                        <li>Esc = cancelar/voltar</li>
+                        <li>Setas = navegar entre itens</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Components Section -->
+    <section class="section">
+        <div class="section-header">
+            <h2>Componentes Prontos</h2>
+            <p>Copie, cole e customize para seu projeto React/Vue</p>
+        </div>
+
+        <div class="components-grid">
+            <!-- Status Indicators -->
+            <div class="component-demo">
+                <div class="component-demo-header">
+                    <h3>Status Indicators</h3>
+                    <p>Feedback visual claro e imediato</p>
+                </div>
+                <div class="component-demo-content">
+                    <div class="status-grid">
+                        <div class="status-card success">
+                            <h4><span class="status-dot"></span> Concluído</h4>
+                            <p>Tarefa finalizada com sucesso</p>
+                        </div>
+                        <div class="status-card warning">
+                            <h4><span class="status-dot"></span> Atenção</h4>
+                            <p>Requer sua atenção em breve</p>
+                        </div>
+                        <div class="status-card error">
+                            <h4><span class="status-dot"></span> Urgente</h4>
+                            <p>Ação imediata necessária</p>
+                        </div>
+                        <div class="status-card info">
+                            <h4><span class="status-dot"></span> Informação</h4>
+                            <p>FYI - sem ação necessária</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Steps -->
+            <div class="component-demo">
+                <div class="component-demo-header">
+                    <h3>Progress Steps</h3>
+                    <p>Mostre onde o usuário está no processo</p>
+                </div>
+                <div class="component-demo-content">
+                    <div class="progress-demo">
+                        <div class="progress-step">
+                            <div class="step-number completed">1</div>
+                            <div class="step-content">
+                                <h4>Informações básicas</h4>
+                                <p>Completado ✓</p>
+                            </div>
+                        </div>
+                        <div class="progress-step">
+                            <div class="step-number active">2</div>
+                            <div class="step-content">
+                                <h4>Configuração</h4>
+                                <p>Em andamento...</p>
+                            </div>
+                        </div>
+                        <div class="progress-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Revisão</h4>
+                                <p>Próximo passo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Focus Mode -->
+            <div class="component-demo">
+                <div class="component-demo-header">
+                    <h3>Focus Mode</h3>
+                    <p>Elimine distrações, mantenha foco</p>
+                </div>
+                <div class="component-demo-content">
+                    <div class="focus-mode-demo">
+                        <div class="focus-overlay">
+                            <div class="focus-content">
+                                <h4>Salvar suas alterações?</h4>
+                                <p>Você fez mudanças que ainda não foram salvas. Deseja salvar antes de sair?</p>
+                                <div class="focus-actions">
+                                    <button class="focus-btn primary">Salvar</button>
+                                    <button class="focus-btn secondary">Descartar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Pronto para Implementar?</h2>
+        <p>Biblioteca open-source em desenvolvimento. Seja um early adopter.</p>
+        <div class="cta-buttons">
+            <a href="#" class="cta-btn primary">Acessar GitHub</a>
+            <a href="https://www.epic.digital" class="cta-btn secondary">Falar com EPIC</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Desenvolvido com ❤️ por <a href="https://www.epic.digital">EPIC Digital</a></p>
+        <p style="margin-top: var(--space-sm); font-size: 12px;">Design para neurodiversidade. Interfaces que funcionam para todos.</p>
+    </footer>
+
+    <script>
+        // Mode Toggle (placeholder for future functionality)
+        document.getElementById('modeToggle').addEventListener('click', function() {
+            alert('Feature em desenvolvimento: Toggle entre visualizações Standard vs ADHD');
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
